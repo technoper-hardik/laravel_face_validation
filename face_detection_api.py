@@ -1,3 +1,5 @@
+import os
+
 import cv2
 import dlib
 import numpy as np
@@ -33,4 +35,4 @@ def detect_faces():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=os.environ.get("APP_PYTHON_PORT"))
