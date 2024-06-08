@@ -21,6 +21,15 @@
                             </p>
                         </header>
 
+                        @if(session()->has('message'))
+                            <div class="bg-indigo-900 text-center py-4 lg:px-4">
+                                <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+                                    <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">Message</span>
+                                    <span class="font-semibold mr-2 text-left flex-auto">{{ session()->get('message') }}</span>
+                                </div>
+                            </div>
+                        @endif
+
                         <form method="post" action="{{ route('users.update', $user) }}"
                               class="grid grid-cols-4 gap-6 mt-6" enctype="multipart/form-data">
                             @csrf
