@@ -254,7 +254,7 @@
             --tw-backdrop-invert: ;
             --tw-backdrop-opacity: ;
             --tw-backdrop-saturate: ;
-            --tw-backdrop-sepia:
+            --tw-backdrop-sepia: ;
         }
 
         ::backdrop {
@@ -304,7 +304,7 @@
             --tw-backdrop-invert: ;
             --tw-backdrop-opacity: ;
             --tw-backdrop-saturate: ;
-            --tw-backdrop-sepia:
+            --tw-backdrop-sepia: ;
         }
 
         .absolute {
@@ -609,7 +609,7 @@
 
         .shadow-\[0px_14px_34px_0px_rgba\(0\2c 0\2c 0\2c 0\.08\)\] {
             --tw-shadow: 0px 14px 34px 0px rgba(0, 0, 0, 0.08);
-            --tw-shadow-colored: 0px 14px 34px 0px var(--tw-shadow-color);
+            --tw-shadow-colored: 0px 14px 34px 0px var(--tw-shadow);
             box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
         }
 
@@ -870,12 +870,23 @@
                 @if (Route::has('login'))
                 <nav class="-mx-3 flex flex-1 justify-end">
                     @auth
-                    <a
-                        href="{{ url('/dashboard') }}"
-                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                    >
-                        Dashboard
-                    </a>
+                        @role('Admin')
+                        <a
+                            href="{{ url('/dashboard') }}"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                            Dashboard
+                        </a>
+                    @else
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                        @endrole
                     @else
                     <a
                         href="{{ route('login') }}"
